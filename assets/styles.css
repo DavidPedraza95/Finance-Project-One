@@ -253,10 +253,11 @@ main:after {
 }
 .srch_wrpr {
   width: 400px;
-  max-width: 400px;
+  max-width: 550px;
   height: 70px;
   position: relative;
   z-index: 1;
+  margin: auto;
 }
 .srch_sb_cnt {
   width: 70px;
