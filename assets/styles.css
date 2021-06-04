@@ -49,6 +49,7 @@ p {
 
 .banner {
   background: transparent url("./DiamondHands.jpeg") 0 0 no-repeat fixed;
+  background-position: 0px -200px;
   text-align: center;
   background-size: cover;
   filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='./DiamondHands.jpeg', sizingMethod='scale');
