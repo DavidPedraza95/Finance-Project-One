@@ -1,0 +1,374 @@
+/*
+ * -- BASE STYLES --
+ * Most of these are inherited from Base, but I want to change a few.
+ */
+body {
+  color: #526066;
+}
+
+h2,
+h3 {
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+p {
+  line-height: 1.6em;
+}
+
+/*
+ * -- Layout Styles --
+ */
+.l-content {
+  margin: 0 auto;
+}
+
+.l-box {
+  padding: 0.5em 2em;
+}
+
+/*
+ * -- MENU STYLES --
+ * Make the menu have a very faint box-shadow.
+ */
+.pure-menu {
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.pure-menu-link {
+  padding: 0.5em 0.7em;
+}
+
+/*
+ * -- BANNER --
+ * The top banner with the headings. By using a combination
+ * of `display: table;` and `display: table-cell;`, we can
+ * vertically center the text.
+ */
+
+.banner {
+  background: transparent url("./DiamondHands.jpeg") 0 0 no-repeat fixed;
+  background-position: 0px -200px;
+  text-align: center;
+  background-size: cover;
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='./DiamondHands.jpeg', sizingMethod='scale');
+
+  height: 200px;
+  width: 100%;
+  margin-bottom: 3em;
+  display: table;
+}
+
+.banner-head {
+  display: table-cell;
+  vertical-align: middle;
+  margin-bottom: 0;
+  font-size: 2em;
+  color: white;
+  font-weight: 500;
+  text-shadow: 0 1px 1px black;
+}
+
+/*
+ * -- stock TABLE WRAPPER --
+ * This element wraps up all the stock table elements
+ */
+.stock-tables,
+.information {
+  max-width: 980px;
+  margin: 0 auto;
+}
+.stock-tables {
+  margin-bottom: 3.125em;
+  text-align: center;
+}
+
+/*
+ * -- stock TABLE  --
+ * Every stock table has the .stock-table class
+ */
+.stock-table {
+  border: 1px solid #ddd;
+  margin: 0 0.5em 2em;
+  padding: 0 0 3em;
+}
+
+/*
+ * -- stock TABLE HEADER COLORS --
+ * Choose a different color based on the type of stock table.
+ */
+.stock-table-free .stock-table-header {
+  background: #519251;
+}
+
+.stock-table-biz .stock-table-header {
+  background: #2c4985;
+}
+
+/*
+ * -- stock TABLE HEADER --
+ * By default, a header is black/white, and has some styles for its <h2> name.
+ */
+.stock-table-header {
+  background: #111;
+  color: #fff;
+}
+.stock-table-header h2 {
+  margin: 0;
+  padding-top: 2em;
+  font-size: 1em;
+  font-weight: normal;
+}
+
+/*
+ * -- stock TABLE PRICE --
+ * Styles for the price and the corresponding <span>per month</span>
+ */
+.stock-table-price {
+  font-size: 6em;
+  margin: 0.2em 0 0;
+  font-weight: 100;
+}
+.stock-table-price span {
+  display: block;
+  text-transform: uppercase;
+  font-size: 0.2em;
+  padding-bottom: 2em;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.5);
+  *color: #fff;
+}
+
+/*
+ * -- stock TABLE LIST --
+ * Each stock table has a <ul> which is denoted by the .stock-table-list class
+ */
+.stock-table-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+/*
+ * -- stock TABLE LIST ELEMENTS --
+ * Styles for the individual list elements within each stock table
+ */
+.stock-table-list li {
+  padding: 0.8em 0;
+  background: #f7f7f7;
+  border-bottom: 1px solid #e7e7e7;
+}
+
+/*
+ * -- stock TABLE BUTTON --
+ * Styles for the "Choose" button at the bottom of a stock table.
+ * This inherits from Pure Button
+ */
+.button-choose {
+  border: 1px solid #ccc;
+  background: #fff;
+  color: #333;
+  border-radius: 2em;
+  font-weight: bold;
+  position: relative;
+  bottom: -1.5em;
+}
+
+.information-head {
+  color: black;
+  font-weight: 500;
+}
+
+.footer {
+  background: #111;
+  color: #888;
+  text-align: center;
+}
+.footer a {
+  color: #ddd;
+}
+
+/*
+ * -- TABLET MEDIA QUERIES --
+ * On tablets, we want to slightly adjust the size of the banner
+ * text and add some vertical space between the various stock tables
+ */
+@media (min-width: 767px) {
+  .banner-head {
+    font-size: 4em;
+  }
+  .stock-table {
+    margin-bottom: 0;
+  }
+}
+
+/*
+ * -- PHONE MEDIA QUERIES --
+ * On phones, we want to reduce the height and font-size of the banner further
+ */
+@media (min-width: 480px) {
+  .banner {
+    height: 400px;
+  }
+  .banner-head {
+    font-size: 3em;
+  }
+}
+
+@import url("https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900");
+@import url("https://fonts.googleapis.com/css?family=Playball");
+
+main:before {
+  content: "Pure CSS ( Search Bar )";
+  font-family: "Lato", sans-serif;
+  position: absolute;
+  top: -70px;
+  left: 50%;
+  color: rgba(0, 0, 0, 0.8);
+  font-size: 26px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  pointer-events: none;
+  color: #fff;
+  text-shadow: hoff voff blur #000;
+}
+main:after {
+  content: "Salman Raza";
+  font-family: "Playball", cursive;
+  position: absolute;
+  bottom: -90px;
+  left: 50%;
+  color: rgba(0, 0, 0, 0.02);
+  font-size: 150px;
+  line-height: 140px;
+  white-space: nowrap;
+  text-transform: lowercase;
+  transform: translateX(-50%);
+  pointer-events: none;
+  z-index: -1;
+}
+.srch_wrpr {
+  width: 400px;
+  max-width: 550px;
+  height: 70px;
+  position: relative;
+  z-index: 1;
+  margin: auto;
+}
+.srch_sb_cnt {
+  width: 70px;
+  height: 70px;
+  background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+  background-color: transparent;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  overflow: hidden;
+  transition: all 0.4s ease-in-out 0s;
+  z-index: 0;
+  border-radius: 5px;
+}
+.sech_txt_inpt {
+  opacity: 0;
+  height: 50px;
+  left: 10px;
+  border-radius: 30px;
+  border: 0;
+  width: 94%;
+  padding: 0 60px 0 15px;
+  background-color: transparent;
+  color: #333;
+  font-size: 15px;
+  transition: all 0.4s ease-in-out 0s;
+}
+.sech_txt_inpt:focus {
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.sech_txt_inpt:focus,
+.srch_btn:focus {
+  outline: none;
+}
+.sech_txt_inpt,
+.srch_btn {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.srch_btn {
+  width: 70px;
+  height: 70px;
+  right: 0;
+  background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+  background-color: transparent;
+  border: 0;
+  transition: all 0.4s ease-in-out 0s;
+  font-size: 26px;
+  cursor: pointer;
+  color: #545454;
+}
+.srch_btn:after {
+  position: absolute;
+  content: "\f00d";
+  font-family: fontAwesome;
+  top: 50%;
+  transform: translateY(-50%) rotate(0deg);
+  right: 10px;
+  height: 30px;
+  width: 30px;
+  font-size: 28px;
+  z-index: -1;
+  visibility: hidden;
+}
+input.checkbox {
+  position: absolute;
+  z-index: 1;
+  width: 70px;
+  height: 70px;
+  opacity: 0;
+  right: 30%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.4s ease-in-out 0s;
+  cursor: pointer;
+}
+input.checkbox:checked {
+  width: 30px;
+  height: 30px;
+  right: -14%;
+  transform: translate(-50%, -60%);
+}
+input.checkbox:checked ~ .srch_sb_cnt {
+  width: 100%;
+  border-radius: 40px;
+  background-color: #333;
+  overflow: visible;
+}
+input.checkbox:checked ~ .srch_sb_cnt .srch_btn {
+  width: 50px;
+  height: 50px;
+  right: 10px;
+  border-radius: 100%;
+  font-size: 20px;
+  background-image: linear-gradient(to top, #ff0844 0%, #ffb199 100%);
+  color: #fff;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+input.checkbox:checked ~ .srch_sb_cnt .sech_txt_inpt {
+  opacity: 1;
+}
+input.checkbox:checked ~ .srch_sb_cnt .srch_btn:after {
+  transform: translateY(-50%) rotate(90deg);
+  right: -50px;
+  visibility: visible;
+  transition: all 0.6s cubic-bezier(0, 0.105, 0.035, 1.57);
+  transition-delay: 0.5s;
+  color: white;
+}
