@@ -1,7 +1,7 @@
 # Finance-Project-One
 
+#API
+https://www.alphavantage.co/documentation/
 
-https://iexcloud.io/docs/api/
-
-
-https://developer.tradier.com/
+#Repo
+https://github.com/DavidPedraza95/Finance-Project-One
