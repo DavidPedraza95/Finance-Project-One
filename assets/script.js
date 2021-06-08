@@ -26,7 +26,7 @@ function renderSearchHistory() {
     }
   }
 
-//   testing, this is where USER types in stock in search bar and we use ${Search} to grab USER input and place it into the apiURL variable
+// testing, this is where USER types in stock in search bar and we use ${Search} to grab USER input and place it into the apiURL variable
   function fetchStock(search) {
     var apiUrl = `${stockApiRootUrl}/query?function=GLOBAL_QUOTE&symbol=${search}&apikey=${stockApiKey}`;
     // var apiUrl = 'https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${search}&apikey=N901EFW75FPBB75M';
@@ -68,7 +68,7 @@ function renderSearchHistory() {
   
     var btn = e.target;
     var search = btn.getAttribute('data-search');
-    fetchCoords(search);
+    fetchStock(search);
   }
 
 
