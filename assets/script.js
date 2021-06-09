@@ -5,9 +5,12 @@ var stockApiKey = 'N901EFW75FPBB75M';
 
 // DOM element references
 var searchForm = document.querySelector('#search-form');
-var searchInput = document.querySelector('#search-input');
+var searchInput = document.querySelector('#searchBar');
 var stockContainer = document.querySelector('#currentStocks');
 var searchHistoryContainer = document.querySelector('#history');
+
+var todayContainer = document.querySelector('#today');
+var forecastContainer = document.querySelector('#forecast');
 
 function renderSearchHistory() { 
     searchHistoryContainer.innerHTML = '';
@@ -16,7 +19,7 @@ function renderSearchHistory() {
     for (var i = searchHistory.length - 1; i >= 0; i--) {
       var btn = document.createElement('button');
       btn.setAttribute('type', 'button');
-      btn.setAttribute('aria-controls', 'stock-table-list');
+      btn.setAttribute('aria-controls', 'today stock');
       btn.classList.add('history-btn', 'btn-history');
   
       // `data-search` allows access to city name when click handler is invoked
@@ -26,21 +29,63 @@ function renderSearchHistory() {
     }
   }
 
-// testing, this is where USER types in stock in search bar and we use ${Search} to grab USER input and place it into the apiURL variable
-  function fetchStock(search) {
-    var apiUrl = `${stockApiRootUrl}/query?function=GLOBAL_QUOTE&symbol=${search}&apikey=${stockApiKey}`;
-    // var apiUrl = 'https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${search}&apikey=N901EFW75FPBB75M';
+ // Function to update history in local storage then updates displayed history.
+function appendToHistory(search) {
+    // If there is no search term return the function
+    if (searchHistory.indexOf(search) !== -1) {
+      return;
+    }
+    searchHistory.push(search);
   
+    localStorage.setItem('search-history', JSON.stringify(searchHistory));
+    renderSearchHistory();
+  } 
+
+// Function to get search history from local storage
+function initSearchHistory() {
+    var storedHistory = localStorage.getItem('search-history');
+    if (storedHistory) {
+      searchHistory = JSON.parse(storedHistory);
+    }
+    renderSearchHistory();
+  }  
+
+function renderItems(symbol, data) {
+    renderCurrentStock(symbol, data.symbol);
+}
+
+function fetchSymbol(symbol) {
+    var { search }  = symbol;
+    var stockSymbol = data[0].symbol;
+    var apiUrl = `${stockApiRootUrl}/query?function=GLOBAL_QUOTE&symbol=${search}&apikey=${stockApiKey}`;
+    
     fetch(apiUrl)
       .then(function (res) {
         return res.json();
       })
       .then(function (data) {
+        renderItems(stockSymbol, data);
+      })
+      .catch(function (err) {
+        console.error(err);
+      });
+}
+
+function fetchSearchedStock(search) {
+    var apiUrl = `${stockApiRootUrl}/query?function=SYMBOL_SEARCH&keywords=${search}&apikey=${stockApiKey}`;
+    //var apiUrl = `${stockApiRootUrl}/query?function=GLOBAL_QUOTE&symbol=${search}&apikey=${stockApiKey}`;
+    //var apiUrl = `${weatherApiRootUrl}/geo/1.0/direct?q=${search}&limit=5&appid=${weatherApiKey}`;
+  
+    fetch(apiUrl)
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (data) {
         if (!data[0]) {
-          alert('Location not found');
+          alert('Symbol not found');
         } else {
           appendToHistory(search);
-          fetchWeather(data[0]);
+          fetchSymbol(data[0]);
         }
       })
       .catch(function (err) {
@@ -56,7 +101,7 @@ function renderSearchHistory() {
   
     e.preventDefault();
     var search = searchInput.value.trim();
-    fetchStock(search);
+    fetchSearchedStock(search);
     searchInput.value = '';
   }
   
@@ -68,7 +113,7 @@ function renderSearchHistory() {
   
     var btn = e.target;
     var search = btn.getAttribute('data-search');
-    fetchStock(search);
+    fetchSearchedStock(search);
   }
 
 
@@ -106,5 +151,6 @@ function displayTime(){
       
     //   getStock(requestUrl);
 
+initSearchHistory();
 searchForm.addEventListener('submit', handleSearchFormSubmit);
 searchHistoryContainer.addEventListener('click', handleSearchHistoryClick);
