@@ -50,13 +50,13 @@ function initSearchHistory() {
     renderSearchHistory();
   }  
 
-function renderItems(symbol, data) {
-    renderCurrentStock(symbol, data.symbol);
+function renderItems(stockName, data) {
+    renderCurrentStock(stockName, data.symbol);
 }
 
-function fetchSymbol(symbol) {
+function fetchSymbol(stockName) {
     var { search }  = symbol;
-    var stockSymbol = data[0].symbol;
+    var stockSymbol = stockName.symbol;
     var apiUrl = `${stockApiRootUrl}/query?function=GLOBAL_QUOTE&symbol=${search}&apikey=${stockApiKey}`;
     
     fetch(apiUrl)
@@ -71,21 +71,23 @@ function fetchSymbol(symbol) {
       });
 }
 
+// sfetchSymbol();
+
 function fetchSearchedStock(search) {
-    var apiUrl = `${stockApiRootUrl}/query?function=SYMBOL_SEARCH&keywords=${search}&apikey=${stockApiKey}`;
-    //var apiUrl = `${stockApiRootUrl}/query?function=GLOBAL_QUOTE&symbol=${search}&apikey=${stockApiKey}`;
+    //var apiUrl = `${stockApiRootUrl}/query?function=SYMBOL_SEARCH&keywords=${search}&apikey=${stockApiKey}`;
+    var apiUrl = `${stockApiRootUrl}/query?function=GLOBAL_QUOTE&symbol=${search}&apikey=${stockApiKey}`;
     //var apiUrl = `${weatherApiRootUrl}/geo/1.0/direct?q=${search}&limit=5&appid=${weatherApiKey}`;
   
     fetch(apiUrl)
-      .then(function (response) {
-        return response.json();
+      .then(function (res) {
+        return res.json();
       })
       .then(function (data) {
-        if (!data[0]) {
+        if (!data['Global Quote']) {
           alert('Symbol not found');
         } else {
           appendToHistory(search);
-          fetchSymbol(data[0]);
+          fetchSymbol(data['Global Quote']);
         }
       })
       .catch(function (err) {
