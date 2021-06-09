@@ -50,28 +50,30 @@ function initSearchHistory() {
     renderSearchHistory();
   }  
 
+ //WIp 
 function renderItems(stockName, data) {
-    renderCurrentStock(stockName, data.symbol);
+    //renderCurrentStock(stockName, data.symbol);
 }
 
-function fetchSymbol(stockName) {
-    var { search }  = symbol;
-    var stockSymbol = stockName.symbol;
-    var apiUrl = `${stockApiRootUrl}/query?function=GLOBAL_QUOTE&symbol=${search}&apikey=${stockApiKey}`;
+//so we got the functionality of this function below wrong. This function below should be used to
+//fetch data for the stock like high, lows, percentage changes, etc, I believe
+
+// function fetchSymbolData(stockName, search) {
+//     // var { search }  = symbol;
+//     var stockSymbol = stockName.symbol;
+//     var apiUrl = `${stockApiRootUrl}/query?function=GLOBAL_QUOTE&symbol=${search}&apikey=${stockApiKey}`;
     
-    fetch(apiUrl)
-      .then(function (res) {
-        return res.json();
-      })
-      .then(function (data) {
-        renderItems(stockSymbol, data);
-      })
-      .catch(function (err) {
-        console.error(err);
-      });
-}
-
-// sfetchSymbol();
+//     fetch(apiUrl)
+//       .then(function (res) {
+//         return res.json();
+//       })
+//       .then(function (data) {
+//         renderItems(stockSymbol, data);
+//       })
+//       .catch(function (err) {
+//         console.error(err);
+//       });
+// }
 
 function fetchSearchedStock(search) {
     //var apiUrl = `${stockApiRootUrl}/query?function=SYMBOL_SEARCH&keywords=${search}&apikey=${stockApiKey}`;
@@ -87,7 +89,7 @@ function fetchSearchedStock(search) {
           alert('Symbol not found');
         } else {
           appendToHistory(search);
-          fetchSymbol(data['Global Quote']);
+          //fetchSymbol(data['Global Quote']);
         }
       })
       .catch(function (err) {
