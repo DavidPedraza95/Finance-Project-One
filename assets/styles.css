@@ -2,7 +2,7 @@
  * -- BASE STYLES --
  * Most of these are inherited from Base, but I want to change a few.
  */
-body {
+ body {
   color: #526066;
 }
 
@@ -17,6 +17,18 @@ p {
   line-height: 1.6em;
 }
 
+
+@keyframes change{
+  0%{
+    background-position: 0 50%;
+  }
+  50%{
+    background-position: 100% 50%;
+  }
+  100%{
+    background-position: 0 50%;
+  }
+}
 /*
  * -- Layout Styles --
  */
@@ -31,13 +43,24 @@ p {
 /*
  * -- MENU STYLES --
  * Make the menu have a very faint box-shadow.
+ * Text changes to black when the link is hovered.
  */
+
 .pure-menu {
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
 }
 
 .pure-menu-link {
   padding: 0.5em 0.7em;
+  color: white;
+}
+
+.pure-menu-link:hover {
+  color: black;
 }
 
 /*
@@ -49,7 +72,8 @@ p {
 
 .banner {
   background: transparent url("./DiamondHands.jpeg") 0 0 no-repeat fixed;
-  background-position: 0px -200px;
+  background-position: 0px ;
+  background-size: 40%;
   text-align: center;
   background-size: cover;
   filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='./DiamondHands.jpeg', sizingMethod='scale');
@@ -99,7 +123,12 @@ p {
  * Choose a different color based on the type of stock table.
  */
 .stock-table-free .stock-table-header {
-  background: #519251;
+  background: linear-gradient(-45deg, #b5e877, #5bc489, #009c8f,#0b717e);
+  animation: change 10s ease-in-out infinite;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-size: 400% 400%;
 }
 
 .stock-table-biz .stock-table-header {
