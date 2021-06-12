@@ -2,6 +2,7 @@
 var searchHistory = [];
 var stockApiRootUrl = 'https://www.alphavantage.co';
 var stockApiKey = 'N901EFW75FPBB75M';
+var chartUrl = 'https://widget.finnhub.io/widgets/stocks/chart?symbol=${search}'; 
 
 // DOM element references
 var searchForm = document.querySelector('#search-form');
@@ -9,6 +10,7 @@ var searchInput = document.querySelector('#searchBar');
 var stockContainer = document.querySelector('#currentStocks');
 var searchHistoryContainer = document.querySelector('#history');
 var todayContainer = document.querySelector('#today');
+var chartHere = document.getElementById('chartHere');
 
 
 function renderSearchHistory() { 
@@ -136,10 +138,10 @@ function initSearchHistory() {
     renderSearchHistory();
   }  
 
- //WIp 
-function renderItems(stockName, data) {
-    //renderCurrentStock(stockName, data.symbol);
-}
+
+function populateSearchedChart(search) {
+   chartHere.setAttribute('src', `https://widget.finnhub.io/widgets/stocks/chart?symbol=${search}&watermarkColor=%231db954&backgroundColor=%23222222&textColor=white%22%3E`);
+}  
 
 function fetchSearchedStock(search) {
     //var apiUrl = `${stockApiRootUrl}/query?function=SYMBOL_SEARCH&keywords=${search}&apikey=${stockApiKey}`;
@@ -154,18 +156,18 @@ function fetchSearchedStock(search) {
           alert('Symbol not found');
         } else {
           appendToHistory(search);
-          createCard(search); 
+          createCard(search);
+          populateSearchedChart(search); 
           //fetchSymbol(data['Global Quote']);
         }
       })
       .catch(function (err) {
         console.error(err);
       });
-  }
+  } 
 
 
-
-  function handleSearchFormSubmit(e) {
+function handleSearchFormSubmit(e) {
     // Don't continue if there is nothing in the search form
     if (!searchInput.value) {
       return;
