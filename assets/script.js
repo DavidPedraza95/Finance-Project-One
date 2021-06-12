@@ -8,9 +8,8 @@ var searchForm = document.querySelector('#search-form');
 var searchInput = document.querySelector('#searchBar');
 var stockContainer = document.querySelector('#currentStocks');
 var searchHistoryContainer = document.querySelector('#history');
-
 var todayContainer = document.querySelector('#today');
-var forecastContainer = document.querySelector('#forecast');
+
 
 function renderSearchHistory() { 
     searchHistoryContainer.innerHTML = '';
@@ -27,7 +26,43 @@ function renderSearchHistory() {
       btn.textContent = searchHistory[i];
       searchHistoryContainer.append(btn);
     }
-  }
+}
+
+function listSymbolInfo(search) {  
+    let objectName = "Global Quote";
+    var apiUrl = `${stockApiRootUrl}/query?function=GLOBAL_QUOTE&symbol=${search}&apikey=${stockApiKey}`;
+
+    // var card = document.createElement('div');
+    // var cardBody = document.createElement('div');
+    // Create an unordered list
+    var list = document.createElement('ul')
+    // card.setAttribute('class', 'card');
+    // cardBody.setAttribute('class', 'card-body');
+    // card.append(cardBody);
+
+    fetch(apiUrl)
+    .then(res => {
+        return res.json();
+    })
+    .then(data => {
+        for (objectName in data) {
+          console.log(data[objectName][2])
+
+          for (const [key, value] of Object.entries(data[objectName])) {
+          console.log(`${key}: ${value}`);
+          var li = document.createElement('li');
+          li.textContent = `${key}: ${value}`;
+          list.appendChild(li);    
+
+         }                       
+       }
+    })
+      // Inject into the DOM
+      var searchedStock = document.querySelector('#today');
+      searchedStock.appendChild(list);
+    //   todayContainer.innerHTML = '';
+    //   todayContainer.append(card);       
+}
 
  // Function to update history in local storage then updates displayed history.
 function appendToHistory(search) {
@@ -78,7 +113,6 @@ function renderItems(stockName, data) {
 function fetchSearchedStock(search) {
     //var apiUrl = `${stockApiRootUrl}/query?function=SYMBOL_SEARCH&keywords=${search}&apikey=${stockApiKey}`;
     var apiUrl = `${stockApiRootUrl}/query?function=GLOBAL_QUOTE&symbol=${search}&apikey=${stockApiKey}`;
-    //var apiUrl = `${weatherApiRootUrl}/geo/1.0/direct?q=${search}&limit=5&appid=${weatherApiKey}`;
   
     fetch(apiUrl)
       .then(function (res) {
@@ -89,6 +123,7 @@ function fetchSearchedStock(search) {
           alert('Symbol not found');
         } else {
           appendToHistory(search);
+          listSymbolInfo(search); 
           //fetchSymbol(data['Global Quote']);
         }
       })
@@ -96,6 +131,8 @@ function fetchSearchedStock(search) {
         console.error(err);
       });
   }
+
+
 
   function handleSearchFormSubmit(e) {
     // Don't continue if there is nothing in the search form
@@ -109,6 +146,9 @@ function fetchSearchedStock(search) {
     searchInput.value = '';
   }
   
+
+
+
   function handleSearchHistoryClick(e) {
     // Don't do search if current elements is not a search history button
     if (!e.target.matches('.btn-history')) {
@@ -136,24 +176,13 @@ function displayTime(){
         displayTime();
     });
 
+    //  clear storage & rerender table
+    function clearHistory() {
+    localStorage.clear();
+    window.location.reload();
+}
 
-    
-    
-    // var currentStock = "AMC";
-    // var requestUrl = "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol="+ currentStock + "&apikey=N901EFW75FPBB75M"
 
-    // function getStock(requestUrl) {
-    //     fetch(requestUrl)
-    //       .then(function (response) {
-    //         console.log(response);
-    //         if (response.status === 200) {
-    //           responseText.textContent = response.status;
-    //         }
-    //         return response.json();
-    //     });
-    //   }
-      
-    //   getStock(requestUrl);
 
 initSearchHistory();
 searchForm.addEventListener('submit', handleSearchFormSubmit);
