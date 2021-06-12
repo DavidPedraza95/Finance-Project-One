@@ -28,7 +28,7 @@ function renderSearchHistory() {
     }
 }
 
-function listSymbolInfo(search) {  
+async function getStockData(search) {  
     let objectName = "Global Quote";
     var apiUrl = `${stockApiRootUrl}/query?function=GLOBAL_QUOTE&symbol=${search}&apikey=${stockApiKey}`;
 
@@ -40,13 +40,10 @@ function listSymbolInfo(search) {
     // cardBody.setAttribute('class', 'card-body');
     // card.append(cardBody);
 
-    fetch(apiUrl)
-    .then(res => {
-        return res.json();
-    })
-    .then(data => {
+    const res = await fetch(apiUrl)
+    const data = await res.json();
+    
         for (objectName in data) {
-          console.log(data[objectName][2])
 
           for (const [key, value] of Object.entries(data[objectName])) {
           console.log(`${key}: ${value}`);
@@ -56,14 +53,68 @@ function listSymbolInfo(search) {
 
          }                       
        }
-    })
-      // Inject into the DOM
-      var searchedStock = document.querySelector('#today');
-      searchedStock.appendChild(list);
-    //   todayContainer.innerHTML = '';
-    //   todayContainer.append(card);       
+
+    return list.innerHTML;
+          
 }
 
+async function createCard(search){
+    var apiUrl = `${stockApiRootUrl}/query?function=GLOBAL_QUOTE&symbol=${search}&apikey=${stockApiKey}`;
+
+    const container = document.getElementById('cardBuilt');
+    
+    // apiResult.forEach((result, idx) => {    
+        // Create card element
+      const card = document.createElement('div');
+      card.classList = 'card-body';
+    
+      // Construct card content
+      const content = `
+        <div class="card" id="Card">
+        <div class="card-header" id="heading">
+          <h5 class="mb-0">
+            <button 
+    
+            type="button"
+            class="btn btn-link" 
+            id="removeButton" 
+            data-toggle="removeCard" 
+            data-target="#removeCard" 
+            aria-expanded="true" 
+            aria-controls="removeCard"
+            onclick="removeCardButton()"
+            >
+              
+            Remove 
+            </button>
+          </h5>
+        </div>
+    
+        <div id="collapse" class="collapse show" aria-labelledby="heading" data-parent="#cardBuilt">
+          <div class="card-body">
+    
+            
+            
+            ${await getStockData(search)}
+            
+    
+          </div>
+        </div>
+      </div>
+      `;
+    
+      // Append newyly created card element to the container
+        container.innerHTML += content;
+      // })
+    }
+    
+    //  clear storage & rerender table
+    function removeCardButton() {
+        var removeCard = document.getElementById("Card")
+        removeCard.remove();
+    }
+    
+    
  // Function to update history in local storage then updates displayed history.
 function appendToHistory(search) {
     // If there is no search term return the function
@@ -90,26 +141,6 @@ function renderItems(stockName, data) {
     //renderCurrentStock(stockName, data.symbol);
 }
 
-//so we got the functionality of this function below wrong. This function below should be used to
-//fetch data for the stock like high, lows, percentage changes, etc, I believe
-
-// function fetchSymbolData(stockName, search) {
-//     // var { search }  = symbol;
-//     var stockSymbol = stockName.symbol;
-//     var apiUrl = `${stockApiRootUrl}/query?function=GLOBAL_QUOTE&symbol=${search}&apikey=${stockApiKey}`;
-    
-//     fetch(apiUrl)
-//       .then(function (res) {
-//         return res.json();
-//       })
-//       .then(function (data) {
-//         renderItems(stockSymbol, data);
-//       })
-//       .catch(function (err) {
-//         console.error(err);
-//       });
-// }
-
 function fetchSearchedStock(search) {
     //var apiUrl = `${stockApiRootUrl}/query?function=SYMBOL_SEARCH&keywords=${search}&apikey=${stockApiKey}`;
     var apiUrl = `${stockApiRootUrl}/query?function=GLOBAL_QUOTE&symbol=${search}&apikey=${stockApiKey}`;
@@ -123,7 +154,7 @@ function fetchSearchedStock(search) {
           alert('Symbol not found');
         } else {
           appendToHistory(search);
-          listSymbolInfo(search); 
+          createCard(search); 
           //fetchSymbol(data['Global Quote']);
         }
       })
@@ -176,8 +207,8 @@ function displayTime(){
         displayTime();
     });
 
-    //  clear storage & rerender table
-    function clearHistory() {
+//  clear storage & rerender table
+function clearHistory() {
     localStorage.clear();
     window.location.reload();
 }
