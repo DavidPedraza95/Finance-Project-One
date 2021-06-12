@@ -41,8 +41,29 @@ p {
 }
 
 .btn.btn-link {
-  background-color: #1b89bc;
-  color: #ffffff;
+  background-color: #326f8b;
+  border: none;
+  color: white;
+  padding: 15px 30px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 1rem;
+  border-radius: 25px;
+}
+
+.history-btn {
+  background-color: #63b5db;
+  border: none;
+  color: white;
+  padding: 15px 30px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 1rem;
+  border-radius: 25px;
 }
 
 .mb-0 {
@@ -120,7 +141,7 @@ p {
  * Choose a different color based on the type of stock table.
  */
 .stock-table-free .stock-table-header {
-  background: #a2af26;
+  background: #c5ce79;
 }
 
 .stock-table-biz .stock-table-header {
