@@ -30,18 +30,15 @@ function renderSearchHistory() {
     }
 }
 
+
 async function getStockData(search) {  
     let objectName = "Global Quote";
     var apiUrl = `${stockApiRootUrl}/query?function=GLOBAL_QUOTE&symbol=${search}&apikey=${stockApiKey}`;
 
-    // var card = document.createElement('div');
-    // var cardBody = document.createElement('div');
     // Create an unordered list
     var list = document.createElement('ul')
-    // card.setAttribute('class', 'card');
-    // cardBody.setAttribute('class', 'card-body');
-    // card.append(cardBody);
 
+    //utilizing async/await to handle promises when building card then list
     const res = await fetch(apiUrl)
     const data = await res.json();
     
@@ -61,12 +58,9 @@ async function getStockData(search) {
 }
 
 async function createCard(search){
-    var apiUrl = `${stockApiRootUrl}/query?function=GLOBAL_QUOTE&symbol=${search}&apikey=${stockApiKey}`;
-
     const container = document.getElementById('cardBuilt');
     
-    // apiResult.forEach((result, idx) => {    
-        // Create card element
+      // Create card element
       const card = document.createElement('div');
       card.classList = 'card-body';
     
@@ -106,18 +100,19 @@ async function createCard(search){
       `;
     
       // Append newyly created card element to the container
-        container.innerHTML += content;
-      // })
-    }
+      container.innerHTML += content;    
+
+}
+
     
-    //  clear storage & rerender table
-    function removeCardButton() {
-        var removeCard = document.getElementById("Card")
-        removeCard.remove();
-    }
+//clear storage & rerender table
+function removeCardButton() {
+    var removeCard = document.getElementById("Card")
+    removeCard.remove();
+}
     
     
- // Function to update history in local storage then updates displayed history.
+//Function to update history in local storage then updates displayed history.
 function appendToHistory(search) {
     // If there is no search term return the function
     if (searchHistory.indexOf(search) !== -1) {
@@ -127,7 +122,8 @@ function appendToHistory(search) {
   
     localStorage.setItem('search-history', JSON.stringify(searchHistory));
     renderSearchHistory();
-  } 
+} 
+
 
 // Function to get search history from local storage
 function initSearchHistory() {
@@ -136,12 +132,13 @@ function initSearchHistory() {
       searchHistory = JSON.parse(storedHistory);
     }
     renderSearchHistory();
-  }  
+}  
 
 
 function populateSearchedChart(search) {
    chartHere.setAttribute('src', `https://widget.finnhub.io/widgets/stocks/chart?symbol=${search}&watermarkColor=%231db954&backgroundColor=%23222222&textColor=white%22%3E`);
-}  
+}
+
 
 function fetchSearchedStock(search) {
     //var apiUrl = `${stockApiRootUrl}/query?function=SYMBOL_SEARCH&keywords=${search}&apikey=${stockApiKey}`;
@@ -164,9 +161,10 @@ function fetchSearchedStock(search) {
       .catch(function (err) {
         console.error(err);
       });
-  } 
+} 
 
 
+//handles input of searched stock soon as User types into searchBar  
 function handleSearchFormSubmit(e) {
     // Don't continue if there is nothing in the search form
     if (!searchInput.value) {
@@ -177,12 +175,11 @@ function handleSearchFormSubmit(e) {
     var search = searchInput.value.trim();
     fetchSearchedStock(search);
     searchInput.value = '';
-  }
+}
   
 
-
-
-  function handleSearchHistoryClick(e) {
+//searchHistory Buttons of stocks
+function handleSearchHistoryClick(e) {
     // Don't do search if current elements is not a search history button
     if (!e.target.matches('.btn-history')) {
       return;
@@ -191,12 +188,10 @@ function handleSearchFormSubmit(e) {
     var btn = e.target;
     var search = btn.getAttribute('data-search');
     fetchSearchedStock(search);
-  }
+}
 
 
-
-
-
+//displayTime by clear button
 function displayTime(){
 
     var timeNow = moment();
@@ -209,12 +204,12 @@ function displayTime(){
         displayTime();
     });
 
-//  clear storage & rerender table
+
+//clear storage & rerender table
 function clearHistory() {
     localStorage.clear();
     window.location.reload();
 }
-
 
 
 initSearchHistory();
