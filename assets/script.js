@@ -13,35 +13,21 @@ var todayContainer = document.querySelector('#today');
 var chartHere = document.getElementById('chartHere');
 
 
-function renderSearchHistory() { 
-    searchHistoryContainer.innerHTML = '';
-  
-    // Start at end of history array and count down to show the most recent at the top.
-    for (var i = searchHistory.length - 1; i >= 0; i--) {
-      var btn = document.createElement('button');
-      btn.setAttribute('type', 'button');
-      btn.setAttribute('aria-controls', 'today stock');
-      btn.classList.add('history-btn', 'btn-history');
-  
-      // `data-search` allows access to city name when click handler is invoked
-      btn.setAttribute('data-search', searchHistory[i]);
-      btn.textContent = searchHistory[i];
-      searchHistoryContainer.append(btn);
-    }
-}
+//FUNCTIONS HERE INCLUDE
+//getStockData which fetchs the list of stock data from Global Quote endpoint
+//createCard which creates the cards dynamically around getStockData
+//populateSearchedChart which dynamically changes the chart as a stock is searched
+//fetchSearchedStock which is the bread & butter, it takes in all 3 functions above when user searchs a Stock
+
 
 async function getStockData(search) {  
     let objectName = "Global Quote";
     var apiUrl = `${stockApiRootUrl}/query?function=GLOBAL_QUOTE&symbol=${search}&apikey=${stockApiKey}`;
 
-    // var card = document.createElement('div');
-    // var cardBody = document.createElement('div');
     // Create an unordered list
     var list = document.createElement('ul')
-    // card.setAttribute('class', 'card');
-    // cardBody.setAttribute('class', 'card-body');
-    // card.append(cardBody);
 
+    //utilizing async/await to handle promises when building card then list
     const res = await fetch(apiUrl)
     const data = await res.json();
     
@@ -61,12 +47,9 @@ async function getStockData(search) {
 }
 
 async function createCard(search){
-    var apiUrl = `${stockApiRootUrl}/query?function=GLOBAL_QUOTE&symbol=${search}&apikey=${stockApiKey}`;
-
     const container = document.getElementById('cardBuilt');
     
-    // apiResult.forEach((result, idx) => {    
-        // Create card element
+      // Create card element
       const card = document.createElement('div');
       card.classList = 'card-body';
     
@@ -106,42 +89,14 @@ async function createCard(search){
       `;
     
       // Append newyly created card element to the container
-        container.innerHTML += content;
-      // })
-    }
-    
-    //  clear storage & rerender table
-    function removeCardButton() {
-        var removeCard = document.getElementById("Card")
-        removeCard.remove();
-    }
-    
-    
- // Function to update history in local storage then updates displayed history.
-function appendToHistory(search) {
-    // If there is no search term return the function
-    if (searchHistory.indexOf(search) !== -1) {
-      return;
-    }
-    searchHistory.push(search);
-  
-    localStorage.setItem('search-history', JSON.stringify(searchHistory));
-    renderSearchHistory();
-  } 
+      container.innerHTML += content;    
 
-// Function to get search history from local storage
-function initSearchHistory() {
-    var storedHistory = localStorage.getItem('search-history');
-    if (storedHistory) {
-      searchHistory = JSON.parse(storedHistory);
-    }
-    renderSearchHistory();
-  }  
-
+}
 
 function populateSearchedChart(search) {
    chartHere.setAttribute('src', `https://widget.finnhub.io/widgets/stocks/chart?symbol=${search}&watermarkColor=%231db954&backgroundColor=%23222222&textColor=white%22%3E`);
-}  
+}
+
 
 function fetchSearchedStock(search) {
     //var apiUrl = `${stockApiRootUrl}/query?function=SYMBOL_SEARCH&keywords=${search}&apikey=${stockApiKey}`;
@@ -164,9 +119,13 @@ function fetchSearchedStock(search) {
       .catch(function (err) {
         console.error(err);
       });
-  } 
+} 
 
 
+//BUTTON FUNCTIONS BELOW
+
+
+//handles input of searched stock soon as User types into searchBar  
 function handleSearchFormSubmit(e) {
     // Don't continue if there is nothing in the search form
     if (!searchInput.value) {
@@ -177,12 +136,11 @@ function handleSearchFormSubmit(e) {
     var search = searchInput.value.trim();
     fetchSearchedStock(search);
     searchInput.value = '';
-  }
+}
   
 
-
-
-  function handleSearchHistoryClick(e) {
+//searchHistory Buttons of stocks
+function handleSearchHistoryClick(e) {
     // Don't do search if current elements is not a search history button
     if (!e.target.matches('.btn-history')) {
       return;
@@ -191,12 +149,24 @@ function handleSearchFormSubmit(e) {
     var btn = e.target;
     var search = btn.getAttribute('data-search');
     fetchSearchedStock(search);
-  }
+}
+
+//clear storage & rerender table
+function clearHistory() {
+    localStorage.clear();
+    window.location.reload();
+}
+
+//remove Card when clicked
+function removeCardButton() {
+    var removeCard = document.getElementById("Card")
+    removeCard.remove();
+}
 
 
+//TIME FUNCTION
 
-
-
+//displayTime by clear button
 function displayTime(){
 
     var timeNow = moment();
@@ -207,14 +177,48 @@ function displayTime(){
     
     $(document).ready(function() {
         displayTime();
-    });
+});
 
-//  clear storage & rerender table
-function clearHistory() {
-    localStorage.clear();
-    window.location.reload();
+
+//INIT or saves search history after button presses
+
+function renderSearchHistory() { 
+    searchHistoryContainer.innerHTML = '';
+  
+    // Start at end of history array and count down to show the most recent at the top.
+    for (var i = searchHistory.length - 1; i >= 0; i--) {
+      var btn = document.createElement('button');
+      btn.setAttribute('type', 'button');
+      btn.setAttribute('aria-controls', 'today stock');
+      btn.classList.add('history-btn', 'btn-history');
+  
+      // `data-search` allows access to city name when click handler is invoked
+      btn.setAttribute('data-search', searchHistory[i]);
+      btn.textContent = searchHistory[i];
+      searchHistoryContainer.append(btn);
+    }
 }
 
+//Function to update history in local storage then updates displayed history.
+function appendToHistory(search) {
+    // If there is no search term return the function
+    if (searchHistory.indexOf(search) !== -1) {
+      return;
+    }
+    searchHistory.push(search);
+  
+    localStorage.setItem('search-history', JSON.stringify(searchHistory));
+    renderSearchHistory();
+} 
+
+// Function to get search history from local storage
+function initSearchHistory() {
+    var storedHistory = localStorage.getItem('search-history');
+    if (storedHistory) {
+      searchHistory = JSON.parse(storedHistory);
+    }
+    renderSearchHistory();
+}  
 
 
 initSearchHistory();
