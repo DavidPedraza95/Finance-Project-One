@@ -28,6 +28,27 @@ p {
   padding: 0.5em 2em;
 }
 
+.card {
+  padding: 1rem;
+  border: 1px solid black;
+  margin: 1rem;
+}
+
+.card .card-header {
+  padding: 0.375rem;
+  background-color: #2d3e50;
+  color: #d9e9e8;
+}
+
+.btn.btn-link {
+  background-color: #1b89bc;
+  color: #ffffff;
+}
+
+.mb-0 {
+  margin-bottom: 0;
+}
+
 /*
  * -- MENU STYLES --
  * Make the menu have a very faint box-shadow.
@@ -99,7 +120,7 @@ p {
  * Choose a different color based on the type of stock table.
  */
 .stock-table-free .stock-table-header {
-  background: #519251;
+  background: #a2af26;
 }
 
 .stock-table-biz .stock-table-header {
