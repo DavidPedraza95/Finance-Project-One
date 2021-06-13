@@ -44,12 +44,11 @@ p {
   background-color: #326f8b;
   border: none;
   color: white;
-  padding: 15px 30px;
+  padding: 10px 20px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  margin: 1rem;
   border-radius: 25px;
 }
 
@@ -61,7 +60,7 @@ p {
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
+  font-size: 23px;
   margin: 1rem;
   border-radius: 25px;
 }
@@ -110,6 +109,14 @@ p {
   color: white;
   font-weight: 500;
   text-shadow: 0 1px 1px black;
+}
+
+#clearBtn {
+  right: -426px;
+}
+
+.time {
+  text-align: center;
 }
 
 /*
