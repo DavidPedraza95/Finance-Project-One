@@ -4,17 +4,65 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="A layout example that shows off a responsive stock table">
-    <title>Stock</title>
+    <title>ApeData</title>
     <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.6/build/pure-min.css" integrity="sha384-Uu6IeWbM+gzNVXJcM9XV3SohHtmWE+3VGi496jvgX1jyvDTXfdK+rfZc8C1Aehk5" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="./assets/styles.css">
 </head>
 <body>
 
+
     <div class="pure-menu pure-menu-horizontal">
         <img src="./assets/Ape.png" class="pure-menu-item" width="60" height="60">
         <li class="pure-menu-item"><a class="pure-menu-link">Ape Data</a></li>
     </div>
+  
+<div class="banner">
+    <h1 class="banner-head">
+        I like<br>
+        The Stock!
+    </h1>
+</div>
+
+<div class="l-content">
+    <div class="stock-tables pure-g">
+        <div class="pure-u-1 pure-u-md-1-3">
+            <div class="stock-table stock-table-free">
+                <div class="stock-table-header">
+                    <h2>Search By Symbol</h2>
+
+                    <span class="stock-table-price">
+
+                        <!-- SearchBar -->
+                        <form id="search-form" class="form">
+                        <div class="srch_wrpr">
+                            <input type="checkbox" name="" class="checkbox">
+
+                                <!-- this is where User will input text of stock like amc or gme -->
+                                <div class="srch_sb_cnt">
+                                <input 
+                                type="text" 
+                                name="text_bar" 
+                                id="searchBar" 
+                                class="form-input sech_txt_inpt" 
+                                placeholder="Type to search..."
+                                aria-labelledby="form-heading"
+                                aria-controls="today stock"
+                                />
+                               
+                                <!-- this is where our JavaScript will target to help create
+                                buttons that the User searched for above 
+                                and will then append each button to list group below-->
+                                <div class="input-group-append">
+                                <button 
+                                    type="submit"
+                                    class="srch_btn"
+                                    id="search-button"
+                                    aria-label="submit search"
+                                    >
+                                    <i class="fa fa-search" 
+                                    aria-hidden="true"></i>
+                                </button>
 
     <div class="banner">
         <h1 class="banner-head">
@@ -99,49 +147,49 @@
                     <!-- this p tag contains current live time     -->
                     <!-- <p id="displayedTime" class="time"></p> -->
                 </div>
+               
+    <!-- chart will display here alongside stock info being populated, this is tackled later
+    into the project     -->
+    <div class="information pure-g">
+        <div class="pure-u-1 pure-u-md-1-2">
+            <div class="l-box">
+                <h3 class="information-head">CHART</h3>
+                <!-- symbol= should be dynamic inside p tag -->
+                <p>
+                    <iframe class="chartHere" id="chartHere" width="600" frameborder="0" height="400" 
+                    src=''
+                    ></iframe>
+                    
+                </p>
             </div>
-                     
-        <!-- chart will display here alongside stock info being populated, this is tackled later
-        into the project     -->
-        <div class="information pure-g">
-            <div class="pure-u-1 pure-u-md-1-2">
-                <div class="l-box">
-                    <h3 class="information-head">CHART</h3>
-                    <!-- symbol= should be dynamic inside p tag -->
-                    <p>
-                        <iframe class="chartHere" id="chartHere" width="600" frameborder="0" height="400" 
-                        src=''
-                        ></iframe>
-                        
-                    </p>
-                </div>
-            </div>       
-        </div> <!-- end information -->
-    </div> <!-- end l-content -->
-    
-    <div class= "pure-u-1-1">
-    <button id="clearBtn" type="button" class="button-choose pure-button" onclick="clearHistory();">Clear</button>
-    <br></br>
-    <br></br>
-    
-    <!-- this p tag contains current live time     -->
-    
-    <p id="displayedTime" class="time"></p>
-    
-    </div>
-    <!-- footer -->
-    <div class="footer l-box">
-        <p>
-            Stonkz
-        </p>
-    </div>
-        <!-- Libraries -->
-        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
-        <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
-        <script src="./assets/script.js"></script>
-    
-    </body>
-    </html>
-    
+        </div>       
+    </div> <!-- end information -->
+</div> <!-- end l-content -->
+
+<div class="pure-u-1-1">
+<div class="centerClearButton">    
+<button id="clearBtn" type="button" class="button-choose pure-button" onclick="clearHistory();">Clear</button>
+</div>
+<br></br>
+<br></br>
+
+<!-- this p tag contains current live time     -->
+
+<p id="displayedTime" class="time"></p>
+
+</div>
+<!-- footer -->
+<div class="footer l-box">
+    <p>
+        Stonkz
+    </p>
+</div>
+    <!-- Libraries -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+    <script src="./assets/script.js"></script>
+
+</body>
+</html>
