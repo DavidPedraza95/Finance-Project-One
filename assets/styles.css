@@ -111,8 +111,9 @@ p {
   text-shadow: 0 1px 1px black;
 }
 
-#clearBtn {
-  right: -426px;
+.centerClearButton {
+  position: absolute;
+  right: 47.25%;
 }
 
 .time {
