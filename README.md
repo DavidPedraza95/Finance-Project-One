@@ -1,8 +1,26 @@
 # Finance-Project-One
 
 =======
+
+1. Stock Tracker was created to include:
+- Interactive search engine to select and track a desired stock.
+- Current date and time is displayed to allow cross referencing with the stock data shown.
+- Selected stock is saved to the local storage.
+- Buttons with the stock's ticker are displayed to quickly switch between the stored stocks.
+- When a stock is selected, a chart is displayed allowing the user to view the current history.
+- Clear all button is provided to clear the local storage.
+
 User Story:
-I as a day trader, I want to compare stocks to make educated decisions about buy/sell on investments.
+“As an investor, I want to keep track of my stocks so that I can make smart investment decisions.”
+
+
+Screenshot of the website shown below:
+
+https://github.com/DavidPedraza95/Finance-Project-One
+
+![Screenshot of the homework is displayed]()
+
+
 
 #Stuff
 https://github.com/public-apis/public-apis#finance
