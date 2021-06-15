@@ -16,12 +16,19 @@ Screenshot of the website shown below:
 Screenshot of the homework is displayed
 
 #ProjectData
+<br/>
 https://github.com/public-apis/public-apis#finance
+<br/>
 https://docs.google.com/presentation/d/1u2QXEuUCmYjtMSAZoklultbv64mG6F8NOEo66YiLmOI/edit#slide=id.g29f43f0a72_0_0
+<br/>
 
 #API
+<br/>
 https://www.alphavantage.co/documentation/
+<br/>
 https://finnhub.io/docs/api/authentication
+<br/>
 
 #Repo 
+<br/>
 https://github.com/DavidPedraza95/Finance-Project-One
