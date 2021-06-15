@@ -11,14 +11,17 @@ User Story: “As an investor, I want to keep track of my stocks so that I can m
 
 Screenshot of the website shown below:
 
-https://github.com/DavidPedraza95/Finance-Project-One
+![Web Screenshot](./assets/ProjectPic.png)
 
 Screenshot of the homework is displayed
 
-#Stuff https://github.com/public-apis/public-apis#finance
-
+#ProjectData
+https://github.com/public-apis/public-apis#finance
 https://docs.google.com/presentation/d/1u2QXEuUCmYjtMSAZoklultbv64mG6F8NOEo66YiLmOI/edit#slide=id.g29f43f0a72_0_0
 
-#API https://www.alphavantage.co/documentation/
+#API
+https://www.alphavantage.co/documentation/
+https://finnhub.io/docs/api/authentication
 
-#Repo https://github.com/DavidPedraza95/Finance-Project-OnE
+#Repo 
+https://github.com/DavidPedraza95/Finance-Project-One
