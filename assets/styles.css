@@ -2,8 +2,9 @@
  * -- BASE STYLES --
  * Most of these are inherited from Base, but I want to change a few.
  */
-body {
+ .body {
   color: #526066;
+  background-color: rgba(0, 0, 0, 0.02);
 }
 
 h2,
@@ -17,6 +18,17 @@ p {
   line-height: 1.6em;
 }
 
+@keyframes change{
+  0%{
+    background-position: 0 50%;
+  }
+  50%{
+    background-position: 100% 50%;
+  }
+  100%{
+    background-position: 0 50%;
+  }
+}
 /*
  * -- Layout Styles --
  */
@@ -29,21 +41,35 @@ p {
 }
 
 .card {
+  color: white;
   padding: 1rem;
   border: 1px solid black;
   margin: 1rem;
+  font-family: "playball";
+  background: url("diamonds.gif") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  transition: 0.5s ease;
+  cursor: pointer;
+  display: flex;
+}
+
+.card:hover{
+  transform: scale(1.02);
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.09);
 }
 
 .card .card-header {
   padding: 0.375rem;
-  background-color: #2d3e50;
   color: #d9e9e8;
 }
 
 .btn.btn-link {
   background-color: #326f8b;
   border: none;
-  color: white;
+  color: rgb(0, 0, 0);
   padding: 15px 30px;
   text-align: center;
   text-decoration: none;
@@ -54,7 +80,7 @@ p {
 }
 
 .history-btn {
-  background-color: #63b5db;
+  background-color: #2e2e2e;
   border: none;
   color: white;
   padding: 15px 30px;
@@ -65,21 +91,63 @@ p {
   margin: 1rem;
   border-radius: 25px;
 }
+.history-btn:hover{
+  transform: scale(1.06);
+  cursor:pointer;
+  box-shadow: 0 0 5px #08fe00, 0 0 10px #08fe00, 0 0 15px #08fe00;
+}
 
 .mb-0 {
   margin-bottom: 0;
 }
 
+#heading.card-header{
+  animation: change 10s ease-in-out infinite;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-size: 100% 100%;
+  list-style: none;
+}
+.card-body{
+  list-style: none;
+}
+.card-body li{
+  width: 450px;
+  margin: 100px auto 0;
+  padding:10px;
+  text-align: left;
+  display: flex;
+  margin: 5px 0;
+  transition: .5s;
+  background: rgba(0, 0, 0, 0.02);
+  box-sizing: border-box;
+  list-style-type: none;
+  letter-spacing: 2.5px;
+}
+.card-body li:before{
+  content: "\1F4B0";
+}
+
+.card-body li:hover{
+  transform:scale(1.06);
+  list-style: none;
+}
 /*
  * -- MENU STYLES --
  * Make the menu have a very faint box-shadow.
  */
 .pure-menu {
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  background-color:#2e2e2e;
 }
 
 .pure-menu-link {
   padding: 0.5em 0.7em;
+  color:#08fe00;
+  font-style: italic;
+  font-size: larger;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 /*
@@ -90,14 +158,16 @@ p {
  */
 
 .banner {
-  background: transparent url("./DiamondHands.jpeg") 0 0 no-repeat fixed;
-  background-position: 0px -200px;
+  background: transparent url("./diamondhands.png") 0 0 no-repeat fixed;
+  background-position: 0px;
   text-align: center;
   background-size: cover;
   filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='./DiamondHands.jpeg', sizingMethod='scale');
-
+  display: block;
   height: 200px;
   width: 100%;
+  margin-left: auto;
+  margin-right: auto;
   margin-bottom: 3em;
   display: table;
 }
@@ -140,8 +210,14 @@ p {
  * -- stock TABLE HEADER COLORS --
  * Choose a different color based on the type of stock table.
  */
+
 .stock-table-free .stock-table-header {
-  background: #c5ce79;
+  background: linear-gradient(-45deg, #befefe, #4fa2e8);
+  animation: change 10s ease-in-out infinite;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-size: 400% 400%;
 }
 
 .stock-table-biz .stock-table-header {
@@ -223,15 +299,15 @@ p {
   font-weight: 500;
 }
 
-.footer {
-  background: #111;
-  color: #888;
+.footer{
+  background: white;
   text-align: center;
+  padding: 10px solid;
 }
-.footer a {
-  color: #ddd;
-}
-
+ #displayedTime{
+   padding: 10px;
+   border-radius: 10px;
+ }
 /*
  * -- TABLET MEDIA QUERIES --
  * On tablets, we want to slightly adjust the size of the banner
@@ -293,6 +369,23 @@ main:after {
   transform: translateX(-50%);
   pointer-events: none;
   z-index: -1;
+}
+button#search-button {
+  color: #4fa2e8;
+}
+.fa-search a::after{
+  color: #4fa2e8;
+}
+
+button#removeButton.btn.btn-link{
+
+  background-color:#fec500 ;
+}
+
+button#removeButton.btn.btn-link:hover{
+  transform: scale(1.06);
+  cursor:pointer;
+  box-shadow: 0 0 5px #fec500, 0 0 10px #fec500, 0 0 15px #fec500;
 }
 .srch_wrpr {
   width: 400px;
@@ -356,7 +449,7 @@ main:after {
   cursor: pointer;
   color: #545454;
 }
-.srch_btn:after {
+.srch_btn::after {
   position: absolute;
   content: "\f00d";
   font-family: fontAwesome;
@@ -399,7 +492,7 @@ input.checkbox:checked ~ .srch_sb_cnt .srch_btn {
   right: 10px;
   border-radius: 100%;
   font-size: 20px;
-  background-image: linear-gradient(to top, #ff0844 0%, #ffb199 100%);
+  background-image: linear-gradient(to top, #08ff3d 0%, #a5ff99 100%);
   color: #fff;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
 }
@@ -413,4 +506,7 @@ input.checkbox:checked ~ .srch_sb_cnt .srch_btn:after {
   transition: all 0.6s cubic-bezier(0, 0.105, 0.035, 1.57);
   transition-delay: 0.5s;
   color: white;
+}
+.l-box:hover{
+  transform: scale(1.06);
 }

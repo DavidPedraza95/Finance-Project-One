@@ -54,20 +54,23 @@ async function createCard(search){
       card.classList = 'card-body';
     
       // Construct card content
+      console.log (search)
+
       const content = `
-        <div class="card" id="Card">
-        <div class="card-header" id="heading">
+        <div class="card" id="Card${search}">
+        <div class="card-header" id="heading${search}">
           <h5 class="mb-0">
             <button 
     
             type="button"
             class="btn btn-link" 
-            id="removeButton" 
+            id="remove${search}"
+            value=${search}
             data-toggle="removeCard" 
             data-target="#removeCard" 
             aria-expanded="true" 
             aria-controls="removeCard"
-            onclick="removeCardButton()"
+            onclick="removeCardButton(event)"
             >
               
             Remove 
@@ -75,7 +78,7 @@ async function createCard(search){
           </h5>
         </div>
     
-        <div id="collapse" class="collapse show" aria-labelledby="heading" data-parent="#cardBuilt">
+        <div id="collapse${search}" class="collapse show" aria-labelledby="heading" data-parent="#cardBuilt">
           <div class="card-body">
     
             
@@ -158,8 +161,10 @@ function clearHistory() {
 }
 
 //remove Card when clicked
-function removeCardButton() {
-    var removeCard = document.getElementById("Card")
+function removeCardButton(event) {
+  console.log (event.target.value)
+  var cardId = "Card"+event.target.value
+    var removeCard = document.getElementById(cardId)
     removeCard.remove();
 }
 
